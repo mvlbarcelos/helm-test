@@ -1,0 +1,17 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: {{ include "price.fullname" . }}
+  labels:
+    app.kubernetes.io/name: {{ include "price.name" . }}
+    helm.sh/chart: {{ include "price.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  hosts:
+  - {{ include "price.name" . }}
+  http:
+  - route:
+    - destination:
+        host: {{ include "price.name" . }}
+        
